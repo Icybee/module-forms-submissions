@@ -11,6 +11,8 @@
 
 namespace ICanBoogie\Modules\Forms\Submissions;
 
+use Brickrouge\A;
+
 use ICanBoogie\Event;
 
 class Hooks
@@ -68,5 +70,64 @@ class Hooks
 				)
 			);
 		}
+	}
+
+	/**
+	 * Alters the "manage" block of the Forms module (`forms`) to add the "Submitted" column.
+	 *
+	 * @param Event $event
+	 * @param \ICanBoogie\Modules\Forms\ManageBlock $block
+	 */
+	public static function on_forms_manageblock_alter_columns(Event $event, \ICanBoogie\Modules\Forms\ManageBlock $block)
+	{
+		global $core;
+
+		$ids = array();
+
+		foreach ($event->records as $record)
+		{
+			$ids[] = $record->nid;
+		}
+
+		if (!$ids)
+		{
+			return;
+		}
+
+		$core->document->css->add('public/admin.css');
+
+		$counts = $core->models['forms.submissions']->where(array('form_id' => $ids))->count('form_id');
+
+ 		$event->columns = \ICanBoogie\array_insert
+ 		(
+ 			$event->columns, 'modelid', array
+ 			(
+ 				'label' => "Submissions",
+ 				'class' => null,
+ 				'hook' => function($record, $property) use($counts)
+ 				{
+ 					$nid = $record->nid;
+ 					$count = empty($counts[$nid]) ? 0 : $counts[$nid];
+ 					$label = t(':count submissions', array(':count' => $count));
+
+ 					if (!$count)
+ 					{
+ 						return '<em class="small">' . $label . '</em>';
+ 					}
+
+ 					return $label;
+ 				},
+
+ 				'filters' => null,
+ 				'filtering' => false,
+ 				'reset' => null,
+ 				'orderable' => false,
+ 				'order' => null,
+ 				'default_order' => 1,
+ 				'discreet' => true
+ 			),
+
+ 			'submissions_count'
+ 		);
 	}
 }
