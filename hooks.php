@@ -11,9 +11,9 @@
 
 namespace ICanBoogie\Modules\Forms\Submissions;
 
-use Brickrouge\A;
-
 use ICanBoogie\Event;
+
+use Brickrouge\A;
 
 class Hooks
 {
@@ -115,7 +115,13 @@ class Hooks
  						return '<em class="small">' . $label . '</em>';
  					}
 
- 					return $label;
+ 					return new A
+ 					(
+ 						$label, \ICanBoogie\Operation::encode("forms.submissions/$nid/export"), array
+ 						(
+ 							'title' => "Export the submissions of this form"
+ 						)
+ 					);
  				},
 
  				'filters' => null,

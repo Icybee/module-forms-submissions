@@ -12,5 +12,7 @@ return array
 		),
 
 		'title.Submissions' => 'Soumissions'
-	)
+	),
+
+	"Submissions for :title.csv" => "Soumissions pour :title.csv"
 );
