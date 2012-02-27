@@ -14,6 +14,7 @@ namespace ICanBoogie\Modules\Forms\Submissions;
 use ICanBoogie\Event;
 
 use Brickrouge\A;
+use Brickrouge\Element;
 
 class Hooks
 {
@@ -135,5 +136,27 @@ class Hooks
 
  			'submissions_count'
  		);
+	}
+
+	/**
+	 * Extends the edit block of the Forms module (`forms`) with a checkbox to enable/disable
+	 * submissions saving. The checkbox is added to the `options` group.
+	 *
+	 * The meta property `save_submissions` of the form record is used to store the state of the
+	 * checkbox.
+	 *
+	 * @param Event $event
+	 */
+	public static function on_forms_editblock_alter_children(Event $event, \ICanBoogie\Modules\Forms\EditBlock $block)
+	{
+		$event->children['metas[save_submissions]'] = new Element
+		(
+			Element::TYPE_CHECKBOX, array
+			(
+				Element::LABEL => 'save_submissions',
+				Element::GROUP => 'options',
+				Element::DESCRIPTION => 'save_submissions'
+			)
+		);
 	}
 }

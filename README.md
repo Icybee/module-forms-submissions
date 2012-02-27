@@ -18,8 +18,17 @@ Event hook: ICanBoogie\Forms\ManageBlock::alter_columns
 -------------------------------------------------------
 
 A hook is attached to the `ICanBoogie\Forms\ManageBlock::alter_columns` event and is used to add
-a "Submissions" column to the "manage" block of the Forms module (`forms`). The column displays the
+a "Submissions" column to the manage block of the Forms module (`forms`). The column displays the
 number of submissions saved for the form.
+
+
+Event hook: ICanBoogie\Forms\EditBlock::alter_children
+------------------------------------------------------
+
+A hook is attached to the `ICanBoogie\Forms\EditBlock::alter_children` event and is used to add
+a checkbox to the edit block of the Forms module (`forms`) in the `options` group. The checkbox is
+used to enable/disable submissions saving. The meta property `save_submissions` of the form record
+is used to store the state of the checkbox.
 
 
 Operation: Export (forms.submissions/:nid/export)
