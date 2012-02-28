@@ -33,6 +33,11 @@ class Hooks
 	{
 		global $core;
 
+		if (!$record->metas['save_submissions'])
+		{
+			return;
+		}
+
 		$model = $core->models['forms.submissions'];
 		$fields_model = $core->models['forms.submissions/fields'];
 
