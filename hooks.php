@@ -29,7 +29,7 @@ class Hooks
 	 * @param Event $event
 	 * @param \ICanBoogie\ActiveRecord\Form $record
 	 */
-	public static function on_form_sent(Event $event, \ICanBoogie\ActiveRecord\Form $record)
+	public static function on_form_sent(\ICanBoogie\Modules\Forms\SentEvent $event, \ICanBoogie\ActiveRecord\Form $record)
 	{
 		global $core;
 

@@ -19,7 +19,7 @@ namespace ICanBoogie\Modules\Forms\Submissions;
  */
 class ExportOperation extends \ICanBoogie\Operation
 {
-	protected function __get_controls()
+	protected function get_controls()
 	{
 		return array
 		(
@@ -27,15 +27,15 @@ class ExportOperation extends \ICanBoogie\Operation
 			self::CONTROL_PERMISSION => 'export submissions'
 		)
 
-		+ parent::__get_controls();
+		+ parent::get_controls();
 	}
 
 	/**
 	 * Returns the form record which submissions should be exported.
 	 *
-	 * @see ICanBoogie.Operation::__get_record()
+	 * @see ICanBoogie.Operation::get_record()
 	 */
-	protected function __get_record()
+	protected function get_record()
 	{
 		global $core;
 
