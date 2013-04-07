@@ -1,5 +1,7 @@
 <?php
 
+namespace Icybee\Modules\Forms\Submissions;
+
 use ICanBoogie\Module;
 use ICanBoogie\ActiveRecord\Model;
 
@@ -11,7 +13,9 @@ return array
 	(
 		'primary' => array
 		(
-			Model::T_SCHEMA => array
+			Model::ACTIVERECORD_CLASS => 'ICanBoogie\ActiveRecord',
+			Model::CLASSNAME => 'ICanBoogie\ActiveRecord\Model',
+			Model::SCHEMA => array
 			(
 				'fields' => array
 				(
@@ -25,7 +29,9 @@ return array
 
 		'fields' => array
 		(
-			Model::T_SCHEMA => array
+			Model::ACTIVERECORD_CLASS => 'ICanBoogie\ActiveRecord',
+			Model::CLASSNAME => 'ICanBoogie\ActiveRecord\Model',
+			Model::SCHEMA => array
 			(
 				'fields' => array
 				(
@@ -36,6 +42,8 @@ return array
 			)
 		)
 	),
+
+	Module::T_NAMESPACE => __NAMESPACE__,
 
 	Module::T_PERMISSIONS => array
 	(

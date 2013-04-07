@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ICanBoogie\Modules\Forms\Submissions;
+namespace Icybee\Modules\Forms\Submissions;
 
 class Module extends \Icybee\Module
 {

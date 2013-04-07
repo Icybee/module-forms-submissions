@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ICanBoogie\Modules\Forms\Submissions;
+namespace Icybee\Modules\Forms\Submissions;
 
 /**
  * Exports the submissions attached to a form.
@@ -51,7 +51,7 @@ class ExportOperation extends \ICanBoogie\Operation
 	{
 		global $core;
 
-		$dates = $core->models['forms.submissions']->select('submission_id, submitted')->find_by_form_id($this->key)->pairs;
+		$dates = $core->models['forms.submissions']->select('submission_id, submitted')->filter_by_form_id($this->key)->pairs;
 
 		if (!$dates)
 		{
@@ -61,7 +61,7 @@ class ExportOperation extends \ICanBoogie\Operation
 		$rows = $core->models['forms.submissions/fields']
 		->joins(':forms.submissions')
 		->select('submission_id, name, value')
-		->find_by_form_id($this->key)
+		->filter_by_form_id($this->key)
 		->mode(\PDO::FETCH_NUM);
 
 		$names = array();

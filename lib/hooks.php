@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ICanBoogie\Modules\Forms\Submissions;
+namespace Icybee\Modules\Forms\Submissions;
 
 use ICanBoogie\Event;
 
@@ -24,12 +24,12 @@ class Hooks
 	 * Parameters are filtered against the named elements of the form. Also, parameters starting
 	 * with an underscore ("_") or a sharp ("#") are discarted.
 	 *
-	 * This method is a callback for the `ICanBoogie\ActiveRecord\Form::sent` event.
+	 * This method is a callback for the `Icybee\Modules\Forms\Form::sent` event.
 	 *
 	 * @param Event $event
-	 * @param \ICanBoogie\ActiveRecord\Form $record
+	 * @param \Icybee\Modules\Forms\Form $record
 	 */
-	public static function on_form_sent(\ICanBoogie\Modules\Forms\SentEvent $event, \ICanBoogie\ActiveRecord\Form $record)
+	public static function on_form_sent(\Icybee\Modules\Forms\SentEvent $event, \Icybee\Modules\Forms\Form $record)
 	{
 		global $core;
 
@@ -82,9 +82,9 @@ class Hooks
 	 * Alters the "manage" block of the Forms module (`forms`) to add the "Submitted" column.
 	 *
 	 * @param Event $event
-	 * @param \ICanBoogie\Modules\Forms\ManageBlock $block
+	 * @param \Icybee\Modules\Forms\ManageBlock $block
 	 */
-	public static function on_forms_manageblock_alter_columns(Event $event, \ICanBoogie\Modules\Forms\ManageBlock $block)
+	public static function on_forms_manageblock_alter_columns(Event $event, \Icybee\Modules\Forms\ManageBlock $block)
 	{
 		global $core;
 
@@ -100,7 +100,7 @@ class Hooks
 			return;
 		}
 
-		$core->document->css->add('public/admin.css');
+		$core->document->css->add(DIR . 'public/admin.css');
 
 		$counts = $core->models['forms.submissions']->where(array('form_id' => $ids))->count('form_id');
 
@@ -152,7 +152,7 @@ class Hooks
 	 *
 	 * @param Event $event
 	 */
-	public static function on_forms_editblock_alter_children(Event $event, \ICanBoogie\Modules\Forms\EditBlock $block)
+	public static function on_forms_editblock_alter_children(Event $event, \Icybee\Modules\Forms\EditBlock $block)
 	{
 		$event->children['metas[save_submissions]'] = new Element
 		(
